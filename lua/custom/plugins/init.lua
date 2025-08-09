@@ -54,15 +54,6 @@ return {
             max_tokens = 20480,
           },
         },
-        moonshot = {
-          endpoint = 'https://api.moonshot.ai/v1',
-          model = 'kimi-k2-0711-preview',
-          timeout = 30000, -- Timeout in milliseconds
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 32768,
-          },
-        },
       },
     },
     dependencies = {
@@ -99,6 +90,9 @@ return {
         ft = { 'markdown', 'Avante' },
       },
     },
+    keys = {
+      { '<leader>aC', '<cmd>AvanteClear<cr>', desc = 'Avante[C]lear' },
+    },
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
@@ -111,7 +105,43 @@ return {
     keys = {
       { '<leader>t', '<cmd>Neotree<cr>', desc = 'Open Neo[t]ree' },
     },
-
     lazy = false, -- neo-tree will lazily load itself
+    config = function()
+      require('neo-tree').setup {
+        filesystem = {
+          commands = {
+            add_to_avante_request = function(state)
+              local node = state.tree:get_node()
+              if node and node.type == 'file' then
+                local file_path = node:get_id()
+                require('avante.api').add_selected_file(file_path)
+                -- Optional: print a confirmation message
+                vim.notify('Added ' .. vim.fn.fnamemodify(file_path, ':t') .. ' to Avante request', vim.log.levels.INFO)
+              else
+                vim.notify('Not a file', vim.log.levels.WARN)
+              end
+            end,
+            remove_from_avante_request = function(state)
+              local node = state.tree:get_node()
+              if node and node.type == 'file' then
+                local file_path = node:get_id()
+                require('avante.api').remove_selected_file(file_path)
+                -- Optional: print a confirmation message
+                vim.notify('Removed ' .. vim.fn.fnamemodify(file_path, ':t') .. ' from Avante request', vim.log.levels.INFO)
+              else
+                vim.notify('Not a file', vim.log.levels.WARN)
+              end
+            end,
+          },
+        },
+        window = {
+          mappings = {
+            ['+'] = 'add_to_avante_request',
+            ['-'] = 'remove_from_avante_request',
+          },
+        },
+        -- ... any other settings ...
+      }
+    end,
   },
 }
