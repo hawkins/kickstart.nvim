@@ -134,14 +134,18 @@ return {
             end,
             clear_avante_request = function(state)
               sidebar = require('avante').get()
+              if not sidebar:is_open() then
+                sidebar:open {}
+              end
               sidebar.file_selector:reset()
+              require('avante.api'):focus()
               vim.notify('Cleared all files from Avante request', vim.log.levels.INFO)
             end,
           },
         },
         window = {
           mappings = {
-            ['<keader>a+'] = 'add_to_avante_request',
+            ['<leader>a+'] = 'add_to_avante_request',
             ['<leader>a-'] = 'remove_from_avante_request',
             ['<leader>ax'] = 'clear_avante_request',
           },
