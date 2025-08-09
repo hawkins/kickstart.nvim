@@ -1,3 +1,11 @@
+-- Extend Vim config while I get used to nvim
+-- https://vi.stackexchange.com/a/39957
+vim.cmd [[
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+]]
+
 --[[
 
 =====================================================================
