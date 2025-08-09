@@ -132,12 +132,18 @@ return {
                 vim.notify('Not a file', vim.log.levels.WARN)
               end
             end,
+            clear_avante_request = function(state)
+              sidebar = require('avante').get()
+              sidebar.file_selector:reset()
+              vim.notify('Cleared all files from Avante request', vim.log.levels.INFO)
+            end,
           },
         },
         window = {
           mappings = {
-            ['+'] = 'add_to_avante_request',
-            ['-'] = 'remove_from_avante_request',
+            ['<keader>a+'] = 'add_to_avante_request',
+            ['<leader>a-'] = 'remove_from_avante_request',
+            ['<leader>ax'] = 'clear_avante_request',
           },
         },
         -- ... any other settings ...
