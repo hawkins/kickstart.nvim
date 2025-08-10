@@ -92,7 +92,13 @@ return {
       },
     },
     keys = {
-      { '<leader>aC', '<cmd>AvanteClear<cr>', desc = 'Avante[C]lear' },
+      { '<leader>aC', '<cmd>AvanteClear<cr>', desc = 'avante: clear' },
+      { '<leader>ag', '<cmd>AvanteGenerateTest<cr>', desc = 'avante: generate test' },
+      { '<leader>af', '<cmd>AvanteRefactor<cr>', desc = 'avante: refactor' },
+      { '<leader>ap', '<cmd>AvanteSend<cr>', desc = 'avante: send' },
+      { '<leader>ad', '<cmd>AvanteRemoveFile<cr>', desc = 'avante: remove file' },
+      { '<leader>av', '<cmd>AvanteShowFiles<cr>', desc = 'avante: show files' },
+      { '<leader>ax', '<cmd>AvanteClear<cr>', desc = 'avante: clear all files from selection' },
     },
   },
   {
