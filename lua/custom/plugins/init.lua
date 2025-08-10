@@ -44,6 +44,7 @@ return {
     opts = {
       provider = 'gemini',
       web_search_engine = 'google',
+      system_prompt = 'You are a helpful and concise coding assistant. Your answers should be brief, direct, and to the point. Avoid verbosity, filler, and unnecessary explanations. Respond only with the requested information or code.',
       providers = {
         claude = {
           endpoint = 'https://api.anthropic.com',
