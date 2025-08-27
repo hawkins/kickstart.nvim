@@ -52,5 +52,12 @@ return {
       end,
       desc = 'Notification History',
     },
+    {
+      '<leader>g',
+      function()
+        Snacks.lazygit()
+      end,
+      desc = 'LazyGit',
+    },
   },
 }
