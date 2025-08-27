@@ -44,4 +44,13 @@ return {
       enabled = true,
     },
   },
+  keys = {
+    {
+      '<leader>n',
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = 'Notification History',
+    },
+  },
 }
