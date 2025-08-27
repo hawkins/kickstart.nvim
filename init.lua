@@ -34,6 +34,39 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
+
+""""""""""""""
+" Whitespace "
+""""""""""""""
+
+" Note: indentation may be overriden per-language below
+
+set autoindent         " Copy indent from current line when starting a new line
+set smartindent        " C-like-langs auto indenting after { and 'cinwords'
+set smarttab           " Change how Tab and Backspace behave
+set expandtab          " Expand tab into appropriate number of spaces
+set softtabstop=2      " Number of spaces a Tab counts for when editing, like inserting a Tab or using Backspace
+set tabstop=2          " Number of spaces a Tab in the file counts for
+set shiftwidth=2       " Number of spaces to use for each step of (auto)indent (>>, <<, cindent, etc)
+set nowrap             " Wrap lines on screen (not buffer)?
+set textwidth=0        " Don't break lines to reach any particular width
+set wrapmargin=0       " Combined with textwidth=0 to prevent line breaks while editing
+set listchars=tab:__,trail:.,extends:>
+set list               " Show invisibles according to 'listchars' value
+
+function! <SID>StripTrailingWhitespace()
+  " Draw two circles
+  let _s = @/
+  let l = line(".")
+  let c = col(".")
+  " Draw the rest of the owl
+  %s/\s\+$//e
+  let @/ = _s
+  call cursor(l,c)
+endfunction
+autocmd BufWritePre * :call <SID>StripTrailingWhitespace()
+
+
 " I don't think there's much useful left here
 "set runtimepath^=~/.vim runtimepath+=~/.vim/after
 "let &packpath = &runtimepath
