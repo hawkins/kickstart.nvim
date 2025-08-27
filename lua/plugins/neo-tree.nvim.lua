@@ -8,6 +8,7 @@ return {
   },
   keys = {
     { '<leader>t', '<cmd>Neotree<cr>', desc = 'Open Neo[t]ree' },
+    { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   lazy = false, -- neo-tree will lazily load itself
   config = function()
@@ -52,6 +53,7 @@ return {
           ['<leader>a+'] = 'add_to_avante_request',
           ['<leader>a-'] = 'remove_from_avante_request',
           ['<leader>ax'] = 'clear_avante_request',
+          ['\\'] = 'close_window',
         },
       },
       -- ... any other settings ...
