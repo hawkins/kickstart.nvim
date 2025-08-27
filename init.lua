@@ -1,11 +1,45 @@
 -- Extend Vim config while I get used to nvim
 -- https://vi.stackexchange.com/a/39957
 vim.cmd [[
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath = &runtimepath
-if filereadable("~/.vimrc")
-  source ~/.vimrc
+""""""""""""
+"          "
+" Sessions "
+"          "
+""""""""""""
+
+" From https://stackoverflow.com/a/10525050
+fu! SaveSess()
+  execute 'mksession! ' . getcwd() . '/.session.vim'
+endfunction
+
+fu! RestoreSess()
+  if empty(argv()) && filereadable(getcwd() . '/.session.vim')
+    execute 'so ' . getcwd() . '/.session.vim'
+    if bufexists(1)
+      for l in range(1, bufnr('$'))
+        if bufwinnr(l) == -1
+          exec 'sbuffer ' . l
+        endif
+      endfor
+    endif
+  endif
+endfunction
+
+autocmd VimLeave * call SaveSess()
+autocmd VimEnter * nested call RestoreSess()
+
+set sessionoptions-=options  " Don't save options
+
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
+
+" I don't think there's much useful left here
+"set runtimepath^=~/.vim runtimepath+=~/.vim/after
+"let &packpath = &runtimepath
+"if filereadable("~/.vimrc")
+"source ~/.vimrc
+"endif
 ]]
 
 --[[
