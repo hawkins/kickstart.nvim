@@ -17,13 +17,14 @@ return {
         {
           pane = 2,
           section = 'terminal',
-          cmd = 'echo $(pwd) , $(which python) | gum table --print --columns "Working Directory,Python Path" --border.foreground 0',
+          cmd = 'echo $(pwd) , $(which python)',
           height = 5,
           padding = 0,
         },
         { section = 'keys', gap = 1, padding = 1 },
         { pane = 2, icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
         { pane = 2, icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+        { pane = 1, icon = ' ', key = 's', desc = 'Store', action = ':Store', padding = 1 },
         {
           pane = 2,
           icon = ' ',
@@ -86,6 +87,13 @@ return {
         Snacks.lazygit()
       end,
       desc = 'LazyGit',
+    },
+    {
+      '<leader>d',
+      function()
+        Snacks.dashboard()
+      end,
+      desc = 'Snacks Dashboard',
     },
   },
 }
