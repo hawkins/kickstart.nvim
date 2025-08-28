@@ -7,7 +7,6 @@ return {
     'nvim-tree/nvim-web-devicons', -- optional, but recommended
   },
   keys = {
-    { '<leader>t', '<cmd>Neotree<cr>', desc = 'Open Neo[t]ree' },
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   lazy = false, -- neo-tree will lazily load itself
