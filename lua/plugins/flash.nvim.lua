@@ -3,7 +3,7 @@ return {
   event = 'VeryLazy',
   ---@type Flash.Config
   opts = {
-    modes = { search = { enabled = true } },
+    modes = { search = { enabled = true, incremental = true } },
   },
     -- stylua: ignore
     keys = {
