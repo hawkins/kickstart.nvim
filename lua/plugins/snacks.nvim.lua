@@ -17,7 +17,7 @@ return {
         {
           pane = 2,
           section = 'terminal',
-          cmd = 'echo $(pwd) , $(which python)',
+          cmd = 'echo $(pwd) , $(which python3)',
           height = 5,
           padding = 0,
         },
@@ -94,6 +94,13 @@ return {
         Snacks.dashboard()
       end,
       desc = 'Snacks Dashboard',
+    },
+    {
+      '<A-t>',
+      function()
+        Snacks.terminal.toggle()
+      end,
+      desc = 'Toggle Integrated Terminal',
     },
   },
 }

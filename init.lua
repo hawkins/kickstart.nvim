@@ -1063,7 +1063,7 @@ require('lazy').setup({
 })
 
 -- Where I write my own lua configs
-require 'custom.terminal' -- VS-Code like terminal
+-- require 'custom.terminal' -- VS-Code like terminal, replaced with Snacks
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
