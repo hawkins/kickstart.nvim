@@ -1,7 +1,7 @@
 return {
   'epwalsh/pomo.nvim',
   version = '*', -- Recommended, use latest release instead of latest commit
-  lazy = true,
+  lazy = false, -- has to be false for dynamic keymappings to be loaded :(
   cmd = {
     'TimerStart',
     'TimerRepeat',
@@ -12,11 +12,11 @@ return {
     'rcarriga/nvim-notify',
   },
   keys = {
-    -- TODO: Custom function to prompt TimerStart for time and name
     { '<leader>ps', '<cmd>TimerSession<CR>', desc = 'Pomo: Session' },
     { '<leader>pp', '<cmd>TimerPause<CR>', desc = 'Pomo: Pause' },
     { '<leader>pr', '<cmd>TimerResume<CR>', desc = 'Pomo: Resume' },
-    { '<leader>pS', '<cmd>TimerStop<CR>', desc = 'Pomo: Stop' },
+    { '<leader>px', '<cmd>TimerStop<CR>', desc = 'Pomo: Stop' },
+    -- NOTE: Dynamic mappings included below in config
   },
   config = function()
     require('pomo').setup {
@@ -98,5 +98,18 @@ return {
         },
       },
     }
+
+    -- Dynamic Mappings
+    vim.keymap.set('n', '<leader>pS', function()
+      vim.ui.input({ prompt = 'How long is the timer in minutes: ' }, function(duration)
+        if duration then
+          vim.ui.input({ prompt = 'Name timer: ' }, function(name)
+            require('pomo').start_timer(duration * 60, name)
+          end)
+        else
+          print 'Input cancelled.'
+        end
+      end)
+    end, { desc = 'Pomo: Start Timer' })
   end,
 }
