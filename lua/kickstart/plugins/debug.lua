@@ -7,9 +7,7 @@
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -23,9 +21,12 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
+    -- Other ideas:
+    -- https://github.com/aikixd/nvim-config/blob/d1084b90bddf5432783b2ee65bd3e713067d3838/lua/config/mapping.lua#L242
     {
       '<F5>',
       function()
@@ -90,10 +91,9 @@ return {
       -- see mason-nvim-dap README for more information
       handlers = {},
 
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
+        'python',
         'delve',
       },
     }
@@ -144,5 +144,36 @@ return {
         detached = vim.fn.has 'win32' == 0,
       },
     }
+
+    -- If installed with UV:
+    -- require('dap-python').setup 'uv'
+    -- If installed globally:
+    require('dap-python').setup 'python3'
+    -- If using the above, then `python3 -m debugpy --version` must work in the shell
+
+    -- TODO: Implement a function that finds a venv within a few directories upward for monorepos
+    require('dap-python').resolve_python = function()
+      return '/absolute/path/to/python'
+    end
+
+    require('dap-python').test_runner = 'pytest'
+
+    -- You can configure custom test runners this way
+    -- local test_runners = require('dap-python').test_runners
+
+    -- -- `test_runners` is a table. The keys are the runner names like `unittest` or `pytest`.
+    -- -- The value is a function that takes two arguments:
+    -- -- The classnames and a methodname
+    -- -- The function must return a module name and the arguments passed to the module as list.
+
+    -- ---@param classnames string[]
+    -- ---@param methodname string?
+    -- test_runners.your_runner = function(classnames, methodname)
+    --   local path = table.concat({
+    --     table.concat(classnames, ':'),
+    --     methodname,
+    --   }, '::')
+    --   return 'modulename', { '-s', path }
+    -- end
   end,
 }
