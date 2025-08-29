@@ -1038,10 +1038,6 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   { import = 'custom.plugins' }, -- Where kickstart suggests installnig to
   { import = 'plugins' }, -- Where Store installs to
 }, {
@@ -1065,6 +1061,9 @@ require('lazy').setup({
     },
   },
 })
+
+-- Where I write my own lua configs
+require 'custom.terminal' -- VS-Code like terminal
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
