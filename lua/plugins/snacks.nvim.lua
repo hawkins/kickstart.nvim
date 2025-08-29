@@ -43,7 +43,7 @@ return {
       },
     },
     explorer = {
-      enabled = true,
+      enabled = false,
     },
     indent = {
       enabled = true,
